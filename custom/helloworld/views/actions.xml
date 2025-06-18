@@ -1,0 +1,15 @@
+<!-- helloworld/views/actions.xml -->
+<odoo>
+    <!-- URL-Aktion zur Weiterleitung auf /helloworld -->
+    <record id="action_helloworld" model="ir.actions.act_url">
+        <field name="name">Hello World</field>
+        <field name="url">/helloworld</field>
+        <field name="target">self</field>
+    </record>
+
+    <!-- Menüeintrag, der auf die obige Aktion zeigt -->
+    <menuitem id="menu_helloworld_root"
+              name="Hello World"
+              action="action_helloworld"
+              sequence="10"/>
+</odoo>
