@@ -1,4 +1,4 @@
-# helloworld/__manifest__.py
+# helloworld/__manifest__.py test
 {
     'name': 'Hello World Route',
     'version': '1.0',
