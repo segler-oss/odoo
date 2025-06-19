@@ -31,9 +31,7 @@ jobs:
 
     - name: Update
       run: |
-          ssh odoo
-          cd ${{ secrets.TEST_PFAD }}
-          git pull
+          ssh odoo "cd '${{ secrets.TEST_PFAD }}' && git pull"
 
     - name: Restart Odoo service
       run: |
