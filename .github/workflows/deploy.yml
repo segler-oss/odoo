@@ -13,21 +13,30 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v3
-      
-    - name: Setup SSH key
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_ed25519
-        chmod 600 ~/.ssh/id_ed25519
-        ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-    - name: SSH Test
-      run: ssh -v -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "echo ok"
-    
-    - name: Deploy code to remote
+    - name: Configure SSH
       run: |
-        rsync -avz --delete --exclude='.git' ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/odoouser/odoo-test
+        mkdir -p ~/.ssh/
+        echo "$SSH_KEY" > ~/.ssh/staging.key
+        chmod 600 ~/.ssh/staging.key
+        cat >>~/.ssh/config <<END
+        Host odoo
+          HostName $SSH_HOST
+          User $SSH_USER
+          IdentityFile ~/.ssh/staging.key
+          StrictHostKeyChecking no
+         END
+      env:
+        SSH_USER: ${{ secrets.SSH_USER }}
+        SSH_KEY: ${{ secrets.SSH_KEY }}
+        SSH_HOST: ${{ secrets.SSH_HOST }}
+
+      
 
     - name: Restart Odoo service
       run: |
-        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo systemctl restart odoo-test"
+        ssh odoo "sudo systemctl restart odoo-test"
+
+    - name: Finish
+      run: echo Finish
+
