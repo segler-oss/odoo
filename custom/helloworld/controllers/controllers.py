@@ -1,6 +1,4 @@
-# helloworld/controllers/main.py
 from odoo import http
-from odoo.http import request
 
 class HelloWorldController(http.Controller):
 

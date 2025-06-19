@@ -1,0 +1,13 @@
+<odoo>
+    <record id="action_goodbye" model="ir.actions.act_url">
+        <field name="name">Goodbye</field>
+        <field name="url">/goodbye</field>
+        <field name="target">self</field>
+    </record>
+
+
+    <menuitem id="menu_goodbye_root"
+              name="Goodbye"
+              action="action_goodbye"
+              sequence="10"/>
+</odoo>
