@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
 
     - name: Configure SSH
       run: |
@@ -39,11 +37,7 @@ jobs:
 
     - name: Restart Odoo service
       run: |
-          ssh -v odoo "sudo systemctl restart odoo-test"
-
-    - name: Restart Odoo service
-      run: |
-        ssh -v odoo "sudo systemctl restart odoo-test"
+          ssh odoo "sudo systemctl restart odoo-test"
 
     - name: Finish
       run: echo Finish
