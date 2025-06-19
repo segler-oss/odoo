@@ -43,4 +43,8 @@ jobs:
 
     - name: Restart Odoo service
       run: |
-        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo systemctl restart odoo-test"
+        ssh -v odoo "sudo systemctl restart odoo-test"
+
+    - name: Finish
+      run: echo Finish
+
