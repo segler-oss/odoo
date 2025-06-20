@@ -1,0 +1,14 @@
+<odoo>
+  <record id="view_order_form_transaction_number" model="ir.ui.view">
+    <field name="name">sale.order.form.transaction</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//sheet/notebook" position="before">
+        <group>
+          <field name="transaction_number"/>
+        </group>
+      </xpath>
+    </field>
+  </record>
+</odoo>
